@@ -17,11 +17,9 @@ const italic: Shortcut = {
   exec: dispatch => {
     dispatch(formatSelection('italic'))
   },
-  isActive: getState => {
-    const state = getState()
-    if (!state.cursor) return false
-    const thought = getThoughtById(state, head(state.cursor))
-    return thought.value.includes('<i>') || thought.value.includes('<em>')
+  isActive: (getState, getCommandState) => {
+    const commandState = getCommandState()
+    return commandState.italic === true
   },
 }
 

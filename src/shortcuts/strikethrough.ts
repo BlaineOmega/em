@@ -18,11 +18,9 @@ const strikethrough: Shortcut = {
     e.preventDefault()
     dispatch(formatSelection('strikethrough'))
   },
-  isActive: getState => {
-    const state = getState()
-    if (!state.cursor) return false
-    const thought = getThoughtById(state, head(state.cursor))
-    return thought.value.includes('<strike>')
+  isActive: (getState, getCommandState) => {
+    const commandState = getCommandState()
+    return commandState.strikethrough === true
   },
 }
 
